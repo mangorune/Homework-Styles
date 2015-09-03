@@ -1,0 +1,61 @@
+\ProvidesPackage{hw_type}[2015/03/09 Homework Typefaces]
+
+% This package provides settings for a simple type aesthetic using libre fonts,
+% created for my homework write-ups at Harvey Mudd College.
+
+% This package does not concern itself with mathematical typesetting, handled
+% in a separate package so that this can be loaded independantly for mathless
+% assignments (such as essays).
+
+% ------------------------------------------------------------------------------
+
+% COPYRIGHT and LICENSE
+
+% Written in 2014-2015 by Benjamin Johnson.
+
+% To the extent possible under law, the author(s) have dedicated all copyright
+% and related and neighboring rights to this source code to the public domain
+% worldwide. This source code is distributed without any warranty.
+
+% You should have received a copy of the CC0 Public Domain Dedication along with
+% this source code. If not, see
+% <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+% ------------------------------------------------------------------------------
+
+%% Multilingual Support
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+%\setotherlanguage{spanish}
+
+%% Typeface choices
+\usepackage{fontspec}
+
+\defaultfontfeatures{Ligatures={Common,TeX}}
+
+% Used by any language without another font defined
+% \setmainfont{Linux Libertine O}
+% \setsansfont{Linux Biolinum O}
+% \setmonofont{Inconsolata}
+% \setmainfont{Source Serif Pro}
+% \setsansfont{Source Sans Pro}
+% \setmonofont{Source Code Pro}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Inconsolata}
+
+% English
+% Used as default language for the document
+%\newfontfamily\englishfont[Script=Latin]{Noto Serif}
+
+% ------------------------------------------------------------------------------
+
+\usepackage[autostyle=true]{csquotes}
+
+\usepackage{setspace}
+
+\usepackage{metalogo}
+
+% ------------------------------------------------------------------------------
+
+\endinput

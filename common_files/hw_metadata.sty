@@ -1,0 +1,68 @@
+\ProvidesPackage{hw_metadata}[2015/01/30 Homework Metadata]
+
+% This package provides metadata macros for assignment, author, license, etc.
+% created for my homework write-ups at Harvey Mudd College.
+
+% This metadata is used in the title, headers, and footers, and embedded in the
+% output document.
+
+% ------------------------------------------------------------------------------
+
+% COPYRIGHT and LICENSE
+
+% Written 2014-2015 by Benjamin Johnson.
+
+% To the extent possible under law, the author(s) have dedicated all copyright
+% and related and neighboring rights to this source code to the public domain
+% worldwide. This source code is distributed without any warranty.
+
+% You should have received a copy of the CC0 Public Domain Dedication along with
+% this source code. If not, see
+% <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+% ------------------------------------------------------------------------------
+
+% Document metadata
+% This is the only part of the preamble which needs to be modified
+% between documents.
+
+% for list processing, toggles, etc. (only used for Acks)
+\usepackage{etoolbox}
+
+\newcommand{\setCourseDepartment}[1]{\def\theCourseDepartment{#1}}
+\newcommand{\setCourseNumber}[1]{\def\theCourseNumber{#1}}
+\newcommand{\setCourseTitle}[1]{\def\theCourseTitle{#1}}
+\newcommand{\setCourseSection}[1]{\def\theCourseSection{#1}}
+%\setCourseDepartment{}
+%\setCourseNumber{}
+%\setCourseTitle{}
+%\setCourseSection{}
+
+\newcommand{\setAssignmentTitle}[1]{\def\theAssignmentTitle{#1}}
+\newcommand{\setAuthor}[1]{\def\theAuthor{#1}}
+\newcommand{\setDate}[1]{\def\theDate{#1}}
+%\setAssignmentTitle{}
+%\setAuthor{}
+%\setDate{}
+
+\newcommand{\setEmail}[1]{\def\theEmail{#1}}
+\newcommand{\setDueDate}[1]{\def\theDueDate{#1}}
+
+% for acknowledgments (acks)
+\newtoggle{nonzeroAcks}
+\togglefalse{nonzeroAcks}
+\newcounter{numAcks}
+\newcommand{\addAck}[1]{
+  \stepcounter{numAcks}
+  \listadd{\theAcksList}{#1}
+  \toggletrue{nonzeroAcks}}
+%\addAck{}
+
+% Dedicate the compiled document to the public domain under CC0.
+\newtoggle{ccZero}
+% The default is to *not* apply coercive legal restrictions.
+\toggletrue{ccZero}
+
+% ------------------------------------------------------------------------------
+
+\endinput

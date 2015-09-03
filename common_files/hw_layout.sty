@@ -1,0 +1,217 @@
+\ProvidesPackage{hw_layout}[2015/01/29 Homework Layout]
+
+% This package provides document layout (title, headers, footers, margins),
+% created for my homework write-ups at Harvey Mudd College.
+
+% Document metadata defined by hw_metadata.sty is used to set the title,
+% headers, and footers, and is embedded in the output document.
+
+% ------------------------------------------------------------------------------
+
+% COPYRIGHT and LICENSE
+
+% Written 2014-2015 by Benjamin Johnson.
+
+% To the extent possible under law, the author(s) have dedicated all copyright
+% and related and neighboring rights to this source code to the public domain
+% worldwide. This source code is distributed without any warranty.
+
+% You should have received a copy of the CC0 Public Domain Dedication along with
+% this source code. If not, see
+% <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+% ------------------------------------------------------------------------------
+
+\usepackage{ltxcmds}
+
+% Titling, Headers, and Footers
+
+\usepackage{titling}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{lastpage}
+
+\title{\sc \theCourseDepartment\
+  \theCourseNumber
+  \@ifundefined{theCourseSection}{}{.\theCourseSection{}}
+  \@ifundefined{theCourseTitle}{}{| \theCourseTitle{}} \\
+  \theAssignmentTitle{}}
+\author{\sc \theAuthor
+  \@ifundefined{theEmail}{}{
+    \makeatletter
+    \ltx@ifpackageloaded{hyperref}
+    {\thanks{\href{mailto:\theEmail}{\theEmail}}}
+    {\thanks{\theEmail}}
+    \makeatother}}
+\date{\sc \theDate
+  \@ifundefined{theDueDate}{}{\thanks{Due \theDueDate}}}
+
+\lhead{\sc \theAuthor}
+\chead{\sc \theAssignmentTitle}
+\rhead{\sc \theDate}
+\lfoot{}
+\cfoot{\sc \thepage\ of \pageref{LastPage}}
+\rfoot{}
+\renewcommand{\headrulewidth}{0.2mm}
+\renewcommand{\footrulewidth}{0.2mm}
+
+\fancypagestyle{fancytitle}{%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyhf{}%
+  \fancyfoot[C]{\sc \thepage\ of \pageref{LastPage}}%
+}
+
+% Moves the first-page title up
+% so as to not waste so much space on it.
+\setlength{\droptitle}{-80pt}
+\pretitle{\begin{center}\Large}
+\posttitle{\par\end{center}\vspace{-10pt}}
+
+% Tracks whether the first Ack has been written yet.
+\newtoggle{theAckMode}
+\togglefalse{theAckMode}
+\newcommand{\listAck}[1]{
+  \iftoggle{theAckMode}
+  {\\ & #1 \settoggle{theAckMode}{true}}
+  {#1 \settoggle{theAckMode}{true}}
+}
+\newcommand{\tabulateAcks}{
+  \iftoggle{nonzeroAcks}{
+    \begin{table}[h]
+      \centering
+      \begin{tabular}{r|l}
+        Acknowledgments &
+        \forlistloop{\listAck}{\theAcksList}
+      \end{tabular}
+    \end{table}
+  }{}
+}
+
+% ------------------------------------------------------------------------------
+
+% PACKAGES for TABLES and GRAPHICS
+
+% Allows use of extra options on \includegraphics
+\usepackage{graphicx}
+% Allows use of \enumerate[...]
+\usepackage{enumerate}
+% Provides \multirow
+\usepackage{multirow}
+
+\usepackage{array}
+
+% PACKAGES for COLORS
+
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% PACKAGES for HYPERLINKS and METADATA
+
+\usepackage{hyperref}
+\usepackage{hyperxmp}
+
+\hypersetup{
+  colorlinks={true},
+  linkcolor={black},
+  urlcolor={black},
+  pdfauthor={\theAuthor{}}
+}
+
+% ------------------------------------------------------------------------------
+
+\usepackage{mdframed}
+
+\mdfdefinestyle{problemstyle}{%
+  linecolor=black,linewidth=0.5pt,%
+  frametitlerule=true,%
+  frametitlebackgroundcolor=gray!0,%
+  subtitlebelowline=true,%
+  subtitleaboveline=true,%
+  subtitlebackgroundcolor=gray!0,%
+  innertopmargin=\topskip,%
+  innerbottommargin=\topskip,%
+}
+
+%% Provide environments for problem statements and solutions.
+% This syntax matches that used in the hmcpset class distributed by the HMC math
+% department, but I've improved on the formatting (in my opinion).
+
+% Problem statement
+% Boxed (can be multipage).
+% If a title is provided as an optional argument,
+% it is bold and separated by a line
+\newenvironment{problem}[1][]{%
+  \begin{mdframed}[style=problemstyle,frametitle=#1]
+}{%
+  \end{mdframed}
+}
+
+\newenvironment{subproblem}[1][]{%
+  \mdfsubtitle{#1}
+}{%
+}
+
+% Problem solution
+% Currently nothing special here.
+% (hmcpset adds a box at the end. Not everything is a proof! grrr)
+\newenvironment{solution}[1][]{%
+}{%
+  %\pagebreak % I'd like to be able to exclude this, and am too lazy to be fancy
+}
+
+% ------------------------------------------------------------------------------
+
+% Drop-in CC0 public domain dedication
+\newcommand{\ccZeroNotice}{
+  \begin{tabular}{m{2.75cm} m{8.5cm}}
+    \raisebox{-0.5\height}{
+      \href{https://creativecommons.org/publicdomain/zero/1.0/}{
+        \XeTeXLinkBox{\includegraphics[width=2.75cm]
+          {./common_files/cc-zero.png}}}}
+    &
+    \sf\footnotesize\setstretch{1.0}
+    To the extent possible under law, the author(s) have waived
+    all copyright and related or neighboring rights to this work.
+  \end{tabular}
+}
+
+\newcommand{\ccZeroBar}{
+  \raisebox{-0.5\height}{
+    \href{https://creativecommons.org/publicdomain/zero/1.0/}{
+      \XeTeXLinkBox{\includegraphics[height=\baselineskip]
+        {./common_files/cc-zero-bar.png}}}
+  }}
+
+\newcommand{\ccZeroStatement}{
+  To the extent possible under law, the author(s) have waived
+  all copyright and related or neighboring rights to this work.}
+
+\newcommand{\ccZeroURL}{https://creativecommons.org/publicdomain/zero/1.0/}
+
+\newcommand{\ccZeroTextNotice}{
+  To the extent possible under law, the author(s) have waived \\
+  all copyright and related or neighboring rights to this work. \\
+  \href{https://creativecommons.org/publicdomain/zero/1.0/}{
+    creativecommons.org/publicdomain/zero/1.0/}
+}
+
+% Dedicate the output document to the public domain under CC0
+\iftoggle{ccZero}{%
+  \hypersetup{
+    pdfcopyright={To the extent possible under law, the author(s) have waived
+      all copyright and related or neighboring rights to this work.},%
+    pdflicenseurl={https://creativecommons.org/publicdomain/zero/1.0/}%
+  }
+  \lfoot{\ccZeroBar}%
+  \fancypagestyle{fancytitle}{%
+    \renewcommand{\headrulewidth}{0pt}%
+    \fancyhf{}%
+    \fancyfoot[L]{\ccZeroBar}%
+    \fancyfoot[C]{\sc \thepage\ of \pageref{LastPage}}%
+  }
+}{%
+  % Change nothing if CC0 not applied.
+}
+
+% ------------------------------------------------------------------------------
+
+\endinput

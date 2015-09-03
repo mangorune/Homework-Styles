@@ -1,0 +1,133 @@
+\ProvidesPackage{hw_math}[2015/03/17 Homework Mathematics]
+
+% This package provides settings for STEM typesetting
+% created for my homework write-ups at Harvey Mudd College.
+
+% Typesetting of general prose is handled separately so this doesn't need to be
+% loaded for mathless assignments (such as essays).
+
+% ------------------------------------------------------------------------------
+
+% COPYRIGHT and LICENSE
+
+% Written in 2014-2015 by Benjamin Johnson.
+
+% To the extent possible under law, the author(s) have dedicated all copyright
+% and related and neighboring rights to this source code to the public domain
+% worldwide. This source code is distributed without any warranty.
+
+% You should have received a copy of the CC0 Public Domain Dedication along with
+% this source code. If not, see
+% <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+% ------------------------------------------------------------------------------
+
+% PACKAGES and MACROS for MATHEMATICS
+
+% Provdes a range of extra math symbols
+\usepackage{amsfonts}
+% Provides environments fot theorems, proof, etc.
+\usepackage{amsthm}
+% Provides \boldsymbol
+\usepackage{amsbsy}
+
+\usepackage{amsopn}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\vspan}{span}
+\DeclareMathOperator{\vnull}{null}
+
+% Common theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem*{definition*}{Definition}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{lemma*}{Lemma}
+
+% Provides \Aboxed
+\usepackage{mathtools}
+% Provides \dif, \od, \pd, \del, etc.
+\usepackage{commath}
+% Provides \diff, \pdiff, etc.
+% Currently using commath instead
+% \usepackage{esdiff}
+% Provides \iint, \oint, etc.
+% Doesn't look as good as AMS Euler's integrals,
+% but provides more options
+\usepackage{esint}
+% Provides assorted math and non-math symbols.
+% Currently using esint for integrals
+\usepackage[nointegrals]{wasysym}
+
+% Real and imaginary parts of complex numbers
+\renewcommand{\Re}{\ensuremath{\mathrm{Re}}}
+\renewcommand{\Im}{\ensuremath{\mathrm{Im}}}
+
+% The imaginary unit (a few options)
+\newcommand{\mathi}{\ensuremath \mathrm{i}}
+% \newcommand{\mathi}{\ensuremath \mathrm{j}}
+% \newcommand{\mathi}{\ensuremath \iota}
+
+% inverse expression, i.e. 1/x ; using cfrac
+\newcommand{\inv}[1]{\cfrac{1}{#1}}
+% new fraction command using slash format, i.e. a/b
+\newcommand{\slfrac}[2]{\left.#1\middle/#2\right.}
+
+% Preferred format for tensors
+\newcommand{\vvec}[1]{\vec{\boldsymbol{#1}}} % Arbitrary vector (bold, arrow)
+\newcommand{\uvec}[1]{\hat{\boldsymbol{#1}}} % Unit vector (bold, hat)
+\newcommand{\vmat}[1]{\vec{\boldsymbol{#1}}} % Arbitrary matrix (bold, arrow)
+\newcommand{\umat}[1]{\hat{\boldsymbol{#1}}} % Operator (bold, hat)
+
+% Choose and multichoose
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(%
+        \genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+\def\binomial#1#2{\ensuremath{\left(%
+        \genfrac{}{}{0pt}{}{#1}{#2}\right)}}
+
+% Commons sets of numbers
+\makeatletter
+\def\numR{\@ifnextchar[{\@numRn}{\@numRone}}
+\def\@numRn[#1]{\ensuremath \mathbb{R}^{#1}}
+\def\@numRone{\ensuremath \mathbb{R}}
+\makeatother
+\makeatletter
+\def\numQ{\@ifnextchar[{\@numQn}{\@numQone}}
+\def\@numQn[#1]{\ensuremath \mathbb{Q}^{#1}}
+\def\@numQone{\ensuremath \mathbb{Q}}
+\makeatother
+\makeatletter
+\def\numZ{\@ifnextchar[{\@numZn}{\@numZone}}
+\def\@numZn[#1]{\ensuremath \mathbb{Z}^{#1}}
+\def\@numZone{\ensuremath \mathbb{Z}}
+\makeatother
+\makeatletter
+\def\numN{\@ifnextchar[{\@numNn}{\@numNone}}
+\def\@numNn[#1]{\ensuremath \mathbb{N}^{#1}}
+\def\@numNone{\ensuremath \mathbb{N}}
+\makeatother
+
+% PACKAGES for SCIENCE
+
+% Provides \standardstate
+% And a bunch of scheme management stuff I don't use yet.
+%\usepackage{chemstyle}
+% Allows \ce{(Mg5Al)(AlSi3)O10(OH)8} etc.
+\usepackage[version=3]{mhchem}
+% Allows \SI{9.80665}{\meter \per\square\second} etc.
+\usepackage{siunitx}
+
+% Auto-sized angle brackets
+\newcommand{\abr}[1]{\left\langle #1 \right\rangle}
+
+% 1/4πε ; a common quantity in electromagnetism
+\newcommand{\peo}{4 \pi \varepsilon_0}
+
+% Allows use of \Bra{}, \Ket{}, \Braket{|}, etc.
+\usepackage{braket}
+
+% ------------------------------------------------------------------------------
+
+\endinput
