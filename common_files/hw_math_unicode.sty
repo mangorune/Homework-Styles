@@ -1,4 +1,4 @@
-\ProvidesPackage{hw_math_unicode}[2015/04/10 Homework Mathematics with Unicode]
+\ProvidesPackage{hw_math_unicode}[2015/09/03 Homework Mathematics with Unicode]
 
 % This package adds Unicode support for STEM typesetting
 % created for my homework write-ups at Harvey Mudd College.
@@ -42,6 +42,12 @@
 % I'd like to be able to change the state labels without necessarily changing
 % normal vector names
 \newcommand{\state}[1]{\mathbf{#1}} % State Vector Label
+
+% Kets with formatted state label
+\newcommand{\kets}[1]{\ket{\state{#1}}}
+\newcommand{\Kets}[1]{\Ket{\state{#1}}}
+\newcommand{\bras}[1]{\bra{\state{#1}}}
+\newcommand{\Bras}[1]{\Bra{\state{#1}}}
 
 % Define '\incr' for the increment operator, commonly refered to and typeset as
 % Greek Capital Delta, but which in fact has its own Unicode code point and
