@@ -1,4 +1,4 @@
-\ProvidesPackage{hw_layout}[2015/01/29 Homework Layout]
+\ProvidesPackage{hw_layout}[2015/09/03 Homework Layout]
 
 % This package provides document layout (title, headers, footers, margins),
 % created for my homework write-ups at Harvey Mudd College.
@@ -31,20 +31,32 @@
 \pagestyle{fancy}
 \usepackage{lastpage}
 
-\title{\sc \theCourseDepartment\
-  \theCourseNumber
-  \@ifundefined{theCourseSection}{}{.\theCourseSection{}}
-  \@ifundefined{theCourseTitle}{}{| \theCourseTitle{}} \\
-  \theAssignmentTitle{}}
-\author{\sc \theAuthor
-  \@ifundefined{theEmail}{}{
-    \makeatletter
-    \ltx@ifpackageloaded{hyperref}
-    {\thanks{\href{mailto:\theEmail}{\theEmail}}}
-    {\thanks{\theEmail}}
-    \makeatother}}
-\date{\sc \theDate
-  \@ifundefined{theDueDate}{}{\thanks{Due \theDueDate}}}
+\title{\sc
+  \@ifundefined{\theCourseDepartment}{}{\theCourseDepartment\ }
+  \@ifundefined{\theCourseNumber}{}{
+    \theCourseNumber
+    \@ifundefined{\theCourseSection}{}{.\theCourseSection{}}
+  }
+  \@ifundefined{\theCourseDepartment}{
+    \@ifundefined{\theCourseNumber}{}{\\}}{\\}
+  \@ifundefined{\theCourseTitle}{}{\theCourseTitle{} \\}
+  \@ifundefined{\theAssignmentTitle}{}{\theAssignmentTitle}
+}
+\author{\sc
+  \@ifundefined{\theAuthor}{}{
+    \theAuthor
+    \@ifundefined{theEmail}{}{
+      \makeatletter
+      \ltx@ifpackageloaded{hyperref}
+      {\thanks{\href{mailto:\theEmail}{\theEmail}}}
+      {\thanks{\theEmail}}
+      \makeatother}
+  }
+}
+\date{\sc
+  \@ifundefined{\theDate}{}{\theDate}
+  \@ifundefined{\theDueDate}{}{\thanks{Due \theDueDate}}
+}
 
 \lhead{\sc \theAuthor}
 \chead{\sc \theAssignmentTitle}
@@ -112,8 +124,10 @@
 \hypersetup{
   colorlinks={true},
   linkcolor={black},
-  urlcolor={black},
-  pdfauthor={\theAuthor{}}
+  urlcolor={black}
+  \@ifundefined{\theAuthor}{}{,
+    pdfauthor={\theAuthor{}}
+  }
 }
 
 % ------------------------------------------------------------------------------
@@ -146,7 +160,7 @@
 }
 
 \newenvironment{subproblem}[1][]{%
-  \mdfsubtitle{#1}
+    \mdfsubtitle{#1}
 }{%
 }
 
@@ -160,56 +174,47 @@
 
 % ------------------------------------------------------------------------------
 
-% Drop-in CC0 public domain dedication
-\newcommand{\ccZeroNotice}{
-  \begin{tabular}{m{2.75cm} m{8.5cm}}
-    \raisebox{-0.5\height}{
-      \href{https://creativecommons.org/publicdomain/zero/1.0/}{
-        \XeTeXLinkBox{\includegraphics[width=2.75cm]
-          {./common_files/cc-zero.png}}}}
-    &
-    \sf\footnotesize\setstretch{1.0}
-    To the extent possible under law, the author(s) have waived
-    all copyright and related or neighboring rights to this work.
-  \end{tabular}
-}
+% Drop-in Statements
 
-\newcommand{\ccZeroBar}{
-  \raisebox{-0.5\height}{
-    \href{https://creativecommons.org/publicdomain/zero/1.0/}{
-      \XeTeXLinkBox{\includegraphics[height=\baselineskip]
-        {./common_files/cc-zero-bar.png}}}
-  }}
-
-\newcommand{\ccZeroStatement}{
-  To the extent possible under law, the author(s) have waived
-  all copyright and related or neighboring rights to this work.}
-
-\newcommand{\ccZeroURL}{https://creativecommons.org/publicdomain/zero/1.0/}
-
-\newcommand{\ccZeroTextNotice}{
-  To the extent possible under law, the author(s) have waived \\
-  all copyright and related or neighboring rights to this work. \\
-  \href{https://creativecommons.org/publicdomain/zero/1.0/}{
-    creativecommons.org/publicdomain/zero/1.0/}
-}
-
-% Dedicate the output document to the public domain under CC0
-\iftoggle{ccZero}{%
-  \hypersetup{
-    pdfcopyright={To the extent possible under law, the author(s) have waived
-      all copyright and related or neighboring rights to this work.},%
-    pdflicenseurl={https://creativecommons.org/publicdomain/zero/1.0/}%
+\newcommand{\rightsNotice}{%
+  \@ifundefined{\rightsStatement}{}{%
+    \begin{tabular}{m{2.75cm} m{8.5cm}}
+      \raisebox{-0.5\height}{%
+      \href{\rightsURL{}}{%
+      \XeTeXLinkBox{%
+      \includegraphics[width=2.75cm]{\rightsImage{}}
+      }}}
+      &
+        \sf\footnotesize\setstretch{1.0}
+        \rightsStatement{}
+    \end{tabular}
   }
-  \lfoot{\ccZeroBar}%
+}
+
+\newcommand{\rightsBar}{%
+  \@ifundefined{\rightsImageBar}{}{%
+    \raisebox{-0.5\height}{%
+      \href{\rightsURL{}}{%
+        \XeTeXLinkBox{%
+          \includegraphics[height=\baselineskip]{\rightsImageBar{}}
+        }}}}
+}
+
+% Apply rights to the output document
+\iftoggle{rights}{%
+  \hypersetup{
+    pdfcopyright={\@ifundefined{\rightsStatement}{}{\rightsStatement{}}},
+    pdflicenseurl={\@ifundefined{\rightsURL}{}{\rightsURL{}}}
+  }
+  \lfoot{\rightsBar{}}%
   \fancypagestyle{fancytitle}{%
     \renewcommand{\headrulewidth}{0pt}%
     \fancyhf{}%
-    \fancyfoot[L]{\ccZeroBar}%
+    \fancyfoot[L]{\rightsBar{}}%
     \fancyfoot[C]{\sc \thepage\ of \pageref{LastPage}}%
   }
 }{%
-  % Change nothing if CC0 not applied.
+  % Change nothing if rights not applied.
 }
 
 % ------------------------------------------------------------------------------

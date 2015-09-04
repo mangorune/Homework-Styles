@@ -1,4 +1,4 @@
-\ProvidesPackage{hw_metadata}[2015/01/30 Homework Metadata]
+\ProvidesPackage{hw_metadata}[2015/09/03 Homework Metadata]
 
 % This package provides metadata macros for assignment, author, license, etc.
 % created for my homework write-ups at Harvey Mudd College.
@@ -58,10 +58,90 @@
   \toggletrue{nonzeroAcks}}
 %\addAck{}
 
-% Dedicate the compiled document to the public domain under CC0.
-\newtoggle{ccZero}
-% The default is to *not* apply coercive legal restrictions.
-\toggletrue{ccZero}
+% ------------------------------------------------------------------------------
+
+% Mark the output document with usage rights information
+\newtoggle{rights}
+% The default is to mark the document.
+\toggletrue{rights}
+
+% No rights provided. All rights reserved.
+\DeclareOption{rights=none}{
+  % Apply coercive legal restrictions to the compiled document.
+}
+
+% Creative Commons Attribution Share-Alike
+\DeclareOption{rights=CC-BY-SA}{
+  \newcommand{\rightsStatement}{%
+    This work is licensed under a
+    Creative Commons Attribution-ShareAlike 4.0 International License.
+  }
+  \newcommand{\rightsURL}{%
+    http://creativecommons.org/licenses/by-sa/4.0/
+  }
+  \newcommand{\rightsTextNotice}{%
+    This work is licensed under a \\
+    \href{\rightsURL}{%
+      Creative Commons Attribution-ShareAlike 4.0 International License
+    }.
+  }
+  \newcommand{\rightsImage}{%
+    \cofi{}/by-sa.png}
+  }
+  \newcommand{\rightsImageBar}{%
+    \cofi{}/by-sa-bar.png}
+  }
+}
+
+% Creative Commons Attribution
+\DeclareOption{rights=CC-BY}{
+  \newcommand{\rightsStatement}{%
+    This work is licensed under a
+    Creative Commons Attribution 4.0 International License.
+  }
+  \newcommand{\rightsURL}{%
+    http://creativecommons.org/licenses/by/4.0/
+  }
+  \newcommand{\rightsTextNotice}{%
+    This work is licensed under a \\
+    \href{\rightsURL}{%
+      Creative Commons Attribution 4.0 International License
+    }.
+  }
+  \newcommand{\rightsImage}{%
+    \cofi{}/by.png}
+  }
+  \newcommand{\rightsImageBar}{%
+    \cofi{}/by-bar.png}
+  }
+}
+
+% CC0 Public Domain Dedication
+\DeclareOption{rights=CC0}{
+  \newcommand{\rightsStatement}{%
+    To the extent possible under law, the author(s) have waived
+    all copyright and related or neighboring rights to this work.
+  }
+  \newcommand{\rightsURL}{%
+    https://creativecommons.org/publicdomain/zero/1.0/
+  }
+  \newcommand{\rightsTextNotice}{%
+    To the extent possible under law, the author(s) have waived \\
+    all copyright and related or neighboring rights to this work. \\
+    \href{\rightsURL{}}{%
+      creativecommons.org/publicdomain/zero/1.0/}
+  }
+  \newcommand{\rightsImage}{%
+    \cofi{}/cc-zero.png}
+  }
+  \newcommand{\rightsImageBar}{%
+    \cofi{}/cc-zero-bar.png}
+  }
+}
+
+\ExecuteOptions{rights=none}
+
+\ProcessOptions\relax
 
 % ------------------------------------------------------------------------------
 
