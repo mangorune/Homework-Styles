@@ -87,6 +87,28 @@
   }
   \newcommand{\rightsImage}{by-sa.png}
   \newcommand{\rightsImageBar}{by-sa-bar.png}
+  \newcommand{\rightsNotice}{%
+    \ifcsdef{rightsStatement}{%
+      \begin{tabular}{m{2.75cm} m{8.5cm}}
+        \raisebox{-0.5\height}{%
+        \href{\rightsURL}{%
+        \XeTeXLinkBox{%
+        \includegraphics[width=2.75cm]{\cofipack/by-sa.png}
+        }}}
+        &
+          \sf\footnotesize\setstretch{1.0}
+          \rightsStatement{}
+      \end{tabular}
+    }{}
+  }
+  \newcommand{\rightsBar}{%
+    \ifcsdef{rightsImageBar}{%
+      \raisebox{-0.5\height}{%
+        \href{\rightsURL}{%
+          \XeTeXLinkBox{%
+            \includegraphics[height=\baselineskip]{\cofipack/by-sa-bar.png}
+          }}}}{}
+  }
 }
 
 % Creative Commons Attribution
@@ -106,6 +128,28 @@
   }
   \newcommand{\rightsImage}{by.png}
   \newcommand{\rightsImageBar}{by-bar.png}
+    \newcommand{\rightsNotice}{%
+    \ifcsdef{rightsStatement}{%
+      \begin{tabular}{m{2.75cm} m{8.5cm}}
+        \raisebox{-0.5\height}{%
+        \href{\rightsURL}{%
+        \XeTeXLinkBox{%
+        \includegraphics[width=2.75cm]{\cofipack/by.png}
+        }}}
+        &
+          \sf\footnotesize\setstretch{1.0}
+          \rightsStatement{}
+      \end{tabular}
+    }{}
+  }
+  \newcommand{\rightsBar}{%
+    \ifcsdef{rightsImageBar}{%
+      \raisebox{-0.5\height}{%
+        \href{\rightsURL}{%
+          \XeTeXLinkBox{%
+            \includegraphics[height=\baselineskip]{\cofipack/by-bar.png}
+          }}}}{}
+  }
 }
 
 % CC0 Public Domain Dedication
@@ -120,11 +164,33 @@
   \newcommand{\rightsTextNotice}{%
     To the extent possible under law, the author(s) have waived \\
     all copyright and related or neighboring rights to this work. \\
-    \href{\rightsURL{}}{%
+    \href{\rightsURL}{%
       creativecommons.org/publicdomain/zero/1.0/}
   }
   \newcommand{\rightsImage}{cc-zero.png}
   \newcommand{\rightsImageBar}{cc-zero-bar.png}
+    \newcommand{\rightsNotice}{%
+    \ifcsdef{rightsStatement}{%
+      \begin{tabular}{m{2.75cm} m{8.5cm}}
+        \raisebox{-0.5\height}{%
+        \href{\rightsURL}{%
+        \XeTeXLinkBox{%
+        \includegraphics[width=2.75cm]{\cofipack/cc-zero.png}
+        }}}
+        &
+          \sf\footnotesize\setstretch{1.0}
+          \rightsStatement{}
+      \end{tabular}
+    }{}
+  }
+  \newcommand{\rightsBar}{%
+    \ifcsdef{rightsImageBar}{%
+      \raisebox{-0.5\height}{%
+        \href{\rightsURL}{%
+          \XeTeXLinkBox{%
+            \includegraphics[height=\baselineskip]{\cofipack/cc-zero-bar.png}
+          }}}}{}
+  }
 }
 
 \ExecuteOptions{rights=none}

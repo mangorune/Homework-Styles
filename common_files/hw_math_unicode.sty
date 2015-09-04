@@ -22,57 +22,62 @@
 % needed for long arrows. up here so unicode-math can override
 \usepackage{extarrows}
 
-% I'm experimenting with using Unicode math.
-% This should come last so it can override previous settings
-\usepackage[math-style=ISO]{unicode-math}
-\setmathfont{texgyrepagella-math.otf}
+\usepackage{iftex}
 
-% unicode-math changes the behavior of bold math, and therefore affects vectors.
-% Now this method works as it should, so the previous kludge is unnecessary.
-% This supercedes my old vector code.
-\renewcommand{\vvec}[1]{{\mathbf{#1}}} % Arbitrary vector (bold)
-\renewcommand{\uvec}[1]{\hat{\mathbf{#1}}} % Unit vector (bold, hat)
-\renewcommand{\vmat}[1]{{\mathbf{#1}}} % Arbitrary matrix (bold)
-\renewcommand{\umat}[1]{\hat{\mathbf{#1}}} % Operator (bold, hat)
+\ifPDFTeX
+  \usepackage{mathpazo}
+  \usepackage{tgpagella} % reload, since mathpazo redefines rmdefault
 
-% The name for \umat was concieved of as an analogue of uvec
-% But it's a dumb name
-% widehat feels too wide sometimes but it's good enough for now
-\newcommand{\op}[1]{\widehat{\mathbf{#1}}} % Operator
-% I'd like to be able to change the state labels without necessarily changing
-% normal vector names
-\newcommand{\state}[1]{\mathbf{#1}} % State Vector Label
+  \DeclareSymbolFont{euler}{U}{eur}{m}{n}
+  \DeclareMathSymbol \uppi \mathalpha {euler} {"19}
 
-% Kets with formatted state label
-\newcommand{\kets}[1]{\ket{\state{#1}}}
-\newcommand{\Kets}[1]{\Ket{\state{#1}}}
-\newcommand{\bras}[1]{\bra{\state{#1}}}
-\newcommand{\Bras}[1]{\Bra{\state{#1}}}
+  % An upright pi for the mathematical constant
+  \newcommand{\mathpi}{\uppi}
 
-% Define '\incr' for the increment operator, commonly refered to and typeset as
-% Greek Capital Delta, but which in fact has its own Unicode code point and
-% LaTeX operator --- the ISO standard. Appearance may vary significantly or not
-% at all depending on typeface.
-\newcommand*\incr{\mathop{}\!\mathbin{}∆}
+\else
+  % I'm experimenting with using Unicode math.
+  % This should come last so it can override previous settings
+  \usepackage[math-style=ISO]{unicode-math}
+  \setmathfont{texgyrepagella-math.otf}
 
-% Per ISO 80000, true mathematical constants (e, i, π) are best typeset upright,
-% not italic, just like units (m, kg, Å) and mathematical operations (sin, lim)
+  % unicode-math changes the behavior of bold math, and therefore affects vectors.
+  % Now this method works as it should, so the previous kludge is unnecessary.
+  % This supercedes my old vector code.
+  \renewcommand{\vvec}[1]{{\mathbf{#1}}} % Arbitrary vector (bold)
+  \renewcommand{\uvec}[1]{\hat{\mathbf{#1}}} % Unit vector (bold, hat)
+  \renewcommand{\vmat}[1]{{\mathbf{#1}}} % Arbitrary matrix (bold)
+  \renewcommand{\umat}[1]{\hat{\mathbf{#1}}} % Operator (bold, hat)
 
-% An upright 'e' for Euler's number
-\newcommand{\mathe}{\mathrm{e}}
-% An upright 'i' for the imaginary unit
-% \newcommand{\mathi}{\mathrm{i}} % Defined in hw_math.sty
-% An upright pi for the mathematical constant
-\newcommand{\mathpi}{\mathrm{\pi}}
+  % The name for \umat was concieved of as an analogue of uvec
+  % But it's a dumb name
+  % widehat feels too wide sometimes but it's good enough for now
+  \renewcommand{\op}[1]{\widehat{\mathbf{#1}}} % Operator
+  % I'd like to be able to change the state labels without necessarily changing
+  % normal vector names
+  % For the moment I've decided state vector labels shouldn't be bold
+  % \renewcommand{\state}[1]{\mathbf{#1}} % State Vector Label
 
-% Fix extending arrows
-\setmathfont[
+  % Per ISO 80000, true mathematical constants (e, i, π) are best typeset upright,
+  % not italic, just like units (m, kg, Å) and mathematical operations (sin, lim)
+
+  % An upright pi for the mathematical constant
+  \newcommand{\mathpi}{\mathrm{\pi}}
+
+  % Define '\incr' for the increment operator, commonly refered to and typeset as
+  % Greek Capital Delta, but which in fact has its own Unicode code point and
+  % LaTeX operator --- the ISO standard. Appearance may vary significantly or not
+  % at all depending on typeface.
+  \renewcommand*\incr{\mathop{}\!\mathbin{}∆}
+
+  % Fix extending arrows
+  \setmathfont[
   range={
     `=,\Longrightarrow,\Rightarrow,\Longleftarrow,\Leftarrow,
     \harrowextender,\longrightarrow,\rightarrow,\longleftarrow,\leftarrow
   }
-]{Asana Math} % Asana is closer to Tex Gyre Pagella in style than XITS is.
-\renewcommand{\relbar}{\mathrel\harrowextender}
+  ]{Asana Math} % Asana is closer to Tex Gyre Pagella in style than XITS is.
+  \renewcommand{\relbar}{\mathrel\harrowextender}
+\fi
 
 % ------------------------------------------------------------------------------
 

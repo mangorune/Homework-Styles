@@ -32,102 +32,143 @@
 \usepackage{amsbsy}
 
 \usepackage{amsopn}
-\DeclareMathOperator{\range}{range}
-\DeclareMathOperator{\vspan}{span}
-\DeclareMathOperator{\vnull}{null}
-\DeclareMathOperator{\tr}{tr}
 
-% Common theorem environments
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}
-\newtheorem*{definition*}{Definition}
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
-\newtheorem*{theorem*}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem*{lemma*}{Lemma}
+%\DeclareOption{extras}{
+  % Provides \Aboxed
+  \usepackage{mathtools}
+  % Provides \dif, \od, \pd, \del, etc.
+  \usepackage{commath}
+  % Provides \diff, \pdiff, etc.
+  % Currently using commath instead
+  % \usepackage{esdiff}
+  % Provides \iint, \oint, etc.
+  % Doesn't look as good as AMS Euler's integrals,
+  % but provides more options
+  \usepackage{esint}
+  % Provides assorted math and non-math symbols.
+  % Currently using esint for integrals
+  \usepackage[nointegrals]{wasysym}
+%}
 
-% Provides \Aboxed
-\usepackage{mathtools}
-% Provides \dif, \od, \pd, \del, etc.
-\usepackage{commath}
-% Provides \diff, \pdiff, etc.
-% Currently using commath instead
-% \usepackage{esdiff}
-% Provides \iint, \oint, etc.
-% Doesn't look as good as AMS Euler's integrals,
-% but provides more options
-\usepackage{esint}
-% Provides assorted math and non-math symbols.
-% Currently using esint for integrals
-\usepackage[nointegrals]{wasysym}
+\DeclareOption{thm}{
+  % Common theorem environments
+  \theoremstyle{definition}
+  \newtheorem{definition}{Definition}
+  \newtheorem*{definition*}{Definition}
+  \theoremstyle{plain}
+  \newtheorem{theorem}{Theorem}
+  \newtheorem*{theorem*}{Theorem}
+  \newtheorem{lemma}{Lemma}
+  \newtheorem*{lemma*}{Lemma}
+}
 
-% Real and imaginary parts of complex numbers
-\renewcommand{\Re}{\ensuremath{\mathrm{Re}}}
-\renewcommand{\Im}{\ensuremath{\mathrm{Im}}}
+\DeclareOption{sets}{
+  % Commons sets of numbers
+  \makeatletter
+  \def\numR{\@ifnextchar[{\@numRn}{\@numRone}}
+  \def\@numRn[#1]{\ensuremath \mathbb{R}^{#1}}
+  \def\@numRone{\ensuremath \mathbb{R}}
+  \makeatother
+  \makeatletter
+  \def\numQ{\@ifnextchar[{\@numQn}{\@numQone}}
+  \def\@numQn[#1]{\ensuremath \mathbb{Q}^{#1}}
+  \def\@numQone{\ensuremath \mathbb{Q}}
+  \makeatother
+  \makeatletter
+  \def\numZ{\@ifnextchar[{\@numZn}{\@numZone}}
+  \def\@numZn[#1]{\ensuremath \mathbb{Z}^{#1}}
+  \def\@numZone{\ensuremath \mathbb{Z}}
+  \makeatother
+  \makeatletter
+  \def\numN{\@ifnextchar[{\@numNn}{\@numNone}}
+  \def\@numNn[#1]{\ensuremath \mathbb{N}^{#1}}
+  \def\@numNone{\ensuremath \mathbb{N}}
+  \makeatother
+}
 
-% The imaginary unit (a few options)
-\newcommand{\mathi}{\ensuremath \mathrm{i}}
-% \newcommand{\mathi}{\ensuremath \mathrm{j}}
-% \newcommand{\mathi}{\ensuremath \iota}
+\DeclareOption{ops}{
+  \DeclareMathOperator{\range}{range}
+  \DeclareMathOperator{\vspan}{span}
+  \DeclareMathOperator{\vnull}{null}
+  \DeclareMathOperator{\tr}{tr}
 
-% inverse expression, i.e. 1/x ; using cfrac
-\newcommand{\inv}[1]{\cfrac{1}{#1}}
-% new fraction command using slash format, i.e. a/b
-\newcommand{\slfrac}[2]{\left.#1\middle/#2\right.}
+  % Real and imaginary parts of complex numbers
+  \renewcommand{\Re}{\ensuremath{\mathrm{Re}}}
+  \renewcommand{\Im}{\ensuremath{\mathrm{Im}}}
 
-% Preferred format for tensors
-\newcommand{\vvec}[1]{\vec{\boldsymbol{#1}}} % Arbitrary vector (bold, arrow)
-\newcommand{\uvec}[1]{\hat{\boldsymbol{#1}}} % Unit vector (bold, hat)
-\newcommand{\vmat}[1]{\vec{\boldsymbol{#1}}} % Arbitrary matrix (bold, arrow)
-\newcommand{\umat}[1]{\hat{\boldsymbol{#1}}} % Operator (bold, hat)
+  % Per ISO 80000, true mathematical constants (e, i, π) are best typeset upright,
+  % not italic, just like units (m, kg, Å) and mathematical operations (sin,
+  % lim)
 
-% Choose and multichoose
-\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(%
-        \genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
-\def\binomial#1#2{\ensuremath{\left(%
+  % An upright 'e' for Euler's number
+  \newcommand{\mathe}{\mathrm{e}}
+  % The imaginary unit (a few options)
+  \newcommand{\mathi}{\ensuremath \mathrm{i}}
+  % \newcommand{\mathi}{\ensuremath \mathrm{j}}
+  % \newcommand{\mathi}{\ensuremath \iota}
+
+  % 1/4πε ; a common quantity in electromagnetism
+  \newcommand{\peo}{4 \pi \varepsilon_0}
+
+  \newcommand*\incr{\mathop{}\!\mathbin\bigtriangleup}
+
+  % inverse expression, i.e. 1/x ; using cfrac
+  \newcommand{\inv}[1]{\cfrac{1}{#1}}
+  % new fraction command using slash format, i.e. a/b
+  \newcommand{\slfrac}[2]{\left.#1\middle/#2\right.}
+
+  % Choose and multichoose
+  \def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(%
+          \genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+  \def\binomial#1#2{\ensuremath{\left(%
         \genfrac{}{}{0pt}{}{#1}{#2}\right)}}
+}
 
-% Commons sets of numbers
-\makeatletter
-\def\numR{\@ifnextchar[{\@numRn}{\@numRone}}
-\def\@numRn[#1]{\ensuremath \mathbb{R}^{#1}}
-\def\@numRone{\ensuremath \mathbb{R}}
-\makeatother
-\makeatletter
-\def\numQ{\@ifnextchar[{\@numQn}{\@numQone}}
-\def\@numQn[#1]{\ensuremath \mathbb{Q}^{#1}}
-\def\@numQone{\ensuremath \mathbb{Q}}
-\makeatother
-\makeatletter
-\def\numZ{\@ifnextchar[{\@numZn}{\@numZone}}
-\def\@numZn[#1]{\ensuremath \mathbb{Z}^{#1}}
-\def\@numZone{\ensuremath \mathbb{Z}}
-\makeatother
-\makeatletter
-\def\numN{\@ifnextchar[{\@numNn}{\@numNone}}
-\def\@numNn[#1]{\ensuremath \mathbb{N}^{#1}}
-\def\@numNone{\ensuremath \mathbb{N}}
-\makeatother
+\DeclareOption{vectors}{
+  % Preferred format for tensors
+  \newcommand{\vvec}[1]{{\boldsymbol{#1}}} % Arbitrary vector (bold, arrow)
+  \newcommand{\uvec}[1]{\hat{\boldsymbol{#1}}} % Unit vector (bold, hat)
+  \newcommand{\vmat}[1]{{\boldsymbol{#1}}} % Arbitrary matrix (bold, arrow)
+  \newcommand{\umat}[1]{\hat{\boldsymbol{#1}}} % Operator (bold, hat)
+}
 
-% PACKAGES for SCIENCE
+\ProcessOptions\relax
 
-% Provides \standardstate
-% And a bunch of scheme management stuff I don't use yet.
-%\usepackage{chemstyle}
-% Allows \ce{(Mg5Al)(AlSi3)O10(OH)8} etc.
-\usepackage[version=3]{mhchem}
-% Allows \SI{9.80665}{\meter \per\square\second} etc.
-\usepackage{siunitx}
+%\DeclareOption{quantum}{
+  % Allows use of \Bra{}, \Ket{}, \Braket{|}, etc.
+  \usepackage{braket}
 
-% Auto-sized angle brackets
-\newcommand{\abr}[1]{\left\langle #1 \right\rangle}
+  % widehat feels too wide sometimes but it's good enough for now
+  \newcommand{\op}[1]{\widehat{\boldsymbol{#1}}} % Operator
 
-% 1/4πε ; a common quantity in electromagnetism
-\newcommand{\peo}{4 \pi \varepsilon_0}
+  % I'd like to be able to change the state labels without necessarily changing
+  % normal vector names
+  % For the moment I've decided state vector labels shouldn't be bold
+  % \newcommand{\state}[1]{\boldsymbol{#1}} % State Vector Label
+  \newcommand{\state}[1]{#1}
 
-% Allows use of \Bra{}, \Ket{}, \Braket{|}, etc.
-\usepackage{braket}
+  % Kets with formatted state label
+  \newcommand{\kets}[1]{\ket{\state{#1}}}
+  \newcommand{\Kets}[1]{\Ket{\state{#1}}}
+  \newcommand{\bras}[1]{\bra{\state{#1}}}
+  \newcommand{\Bras}[1]{\Bra{\state{#1}}}
+
+  % Auto-sized angle brackets
+  \newcommand{\abr}[1]{\left\langle #1 \right\rangle}
+%}
+
+%\DeclareOption{chemistry}{
+  % Provides \standardstate
+  % And a bunch of scheme management stuff I don't use yet.
+  % \usepackage{chemstyle}
+  % Allows \ce{(Mg5Al)(AlSi3)O10(OH)8} etc.
+  \usepackage[version=3]{mhchem}
+%}
+
+%\DeclareOption{units}{
+  % Allows \SI{9.80665}{\meter \per\square\second} etc.
+  \usepackage{siunitx}
+%}
 
 % ------------------------------------------------------------------------------
 

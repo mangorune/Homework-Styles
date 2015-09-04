@@ -23,30 +23,44 @@
 
 % ------------------------------------------------------------------------------
 
+\usepackage{iftex}
+
 %% Multilingual Support
-\usepackage{polyglossia}
-\setdefaultlanguage{english}
-%\setotherlanguage{spanish}
+\ifPDFTeX
+  % Use Babel for multilingual support with PDFTeX
+  % I'm not going to bother figuring out the particularities of that
+  % Do it yourself, or better yet, don't use PDFTeX!
+  \usepackage[english]{babel}
+\else
+  \usepackage{polyglossia}
+  \setdefaultlanguage{english}
+  %\setotherlanguage{spanish}
+\fi
 
 %% Typeface choices
-\usepackage{fontspec}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage{tgpagella}
+  %\usepackage{inconsolata}
+\else
+  
+  \usepackage{fontspec}
 
-\defaultfontfeatures{Ligatures={Common,TeX}}
+  % Used by any language without another font defined
+  % \setmainfont{Linux Libertine O}
+  % \setsansfont{Linux Biolinum O}
+  % \setmonofont{Inconsolata}
+  % \setmainfont{Source Serif Pro}
+  % \setsansfont{Source Sans Pro}
+  % \setmonofont{Source Code Pro}
+  \setmainfont[Ligatures={Common,TeX}]{TeX Gyre Pagella}
+  \setsansfont[Ligatures={Common,TeX}]{TeX Gyre Heros}
+  \setmonofont{Inconsolata}
 
-% Used by any language without another font defined
-% \setmainfont{Linux Libertine O}
-% \setsansfont{Linux Biolinum O}
-% \setmonofont{Inconsolata}
-% \setmainfont{Source Serif Pro}
-% \setsansfont{Source Sans Pro}
-% \setmonofont{Source Code Pro}
-\setmainfont{TeX Gyre Pagella}
-\setsansfont{TeX Gyre Heros}
-\setmonofont{Inconsolata}
-
-% English
-% Used as default language for the document
-%\newfontfamily\englishfont[Script=Latin]{Noto Serif}
+  % English
+  % Used as default language for the document
+  % \newfontfamily\englishfont[Script=Latin]{Noto Serif}
+\fi
 
 % ------------------------------------------------------------------------------
 

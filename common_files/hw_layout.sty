@@ -174,32 +174,6 @@
 
 % ------------------------------------------------------------------------------
 
-% Drop-in Statements
-
-\newcommand{\rightsNotice}{%
-  \ifcsdef{rightsStatement}{%
-    \begin{tabular}{m{2.75cm} m{8.5cm}}
-      \raisebox{-0.5\height}{%
-      \href{\rightsURL{}}{%
-      \XeTeXLinkBox{%
-      \includegraphics[width=2.75cm]{\cofipack/\rightsImage}
-      }}}
-      &
-        \sf\footnotesize\setstretch{1.0}
-        \rightsStatement{}
-    \end{tabular}
-  }{}
-}
-
-\newcommand{\rightsBar}{%
-  \ifcsdef{rightsImageBar}{%
-    \raisebox{-0.5\height}{%
-      \href{\rightsURL{}}{%
-        \XeTeXLinkBox{%
-          \includegraphics[height=\baselineskip]{\cofipack/\rightsImageBar}
-        }}}}{}
-}
-
 % Apply rights to the output document
 \iftoggle{rights}{%
   \hypersetup{
