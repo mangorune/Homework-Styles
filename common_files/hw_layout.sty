@@ -32,35 +32,37 @@
 \usepackage{lastpage}
 
 \title{\sc
-  \@ifundefined{\theCourseDepartment}{}{\theCourseDepartment\ }
-  \@ifundefined{\theCourseNumber}{}{
-    \theCourseNumber
-    \@ifundefined{\theCourseSection}{}{.\theCourseSection{}}
-  }
-  \@ifundefined{\theCourseDepartment}{
-    \@ifundefined{\theCourseNumber}{}{\\}}{\\}
-  \@ifundefined{\theCourseTitle}{}{\theCourseTitle{} \\}
-  \@ifundefined{\theAssignmentTitle}{}{\theAssignmentTitle}
+  \ifcsdef{theCourseDepartment}{\theCourseDepartment{}}{}
+  \ifcsdef{theCourseNumber}{%
+    \theCourseNumber{}%
+    \ifcsdef{theCourseSection}{.\theCourseSection{}}{}
+  }{}
+  \ifcsdef{theCourseDepartment}{\\}{
+    \ifcsdef{theCourseNumber}{\\}{}}
+  \ifcsdef{theCourseTitle}{\theCourseTitle{}\\}{}
+  \ifcsdef{theAssignmentTitle}{\theAssignmentTitle{}}{}
 }
 \author{\sc
-  \@ifundefined{\theAuthor}{}{
+  \ifcsdef{theAuthor}{
     \theAuthor
-    \@ifundefined{theEmail}{}{
+    \ifcsdef{theEmail}{%
       \makeatletter
       \ltx@ifpackageloaded{hyperref}
       {\thanks{\href{mailto:\theEmail}{\theEmail}}}
       {\thanks{\theEmail}}
-      \makeatother}
-  }
+      \makeatother}{}
+  }{}
 }
 \date{\sc
-  \@ifundefined{\theDate}{}{\theDate}
-  \@ifundefined{\theDueDate}{}{\thanks{Due \theDueDate}}
+  \ifcsdef{theDate}{%
+    \theDate
+    \ifcsdef{theDueDate}{\thanks{Due \theDueDate{}}}{}
+  }{}
 }
 
-\lhead{\sc \theAuthor}
-\chead{\sc \theAssignmentTitle}
-\rhead{\sc \theDate}
+\lhead{\sc\ifcsdef{theAuthor}{\theAuthor}{}}
+\chead{\sc\ifcsdef{theAssignmentTitle}{\theAssignmentTitle}{}}
+\rhead{\sc\ifcsdef{theDate}{\theDate}{}}
 \lfoot{}
 \cfoot{\sc \thepage\ of \pageref{LastPage}}
 \rfoot{}
@@ -124,10 +126,8 @@
 \hypersetup{
   colorlinks={true},
   linkcolor={black},
-  urlcolor={black}
-  \@ifundefined{\theAuthor}{}{,
-    pdfauthor={\theAuthor{}}
-  }
+  urlcolor={black},
+  pdfauthor={\ifcsdef{theAuthor}{\theAuthor{}}{}}
 }
 
 % ------------------------------------------------------------------------------
@@ -177,34 +177,34 @@
 % Drop-in Statements
 
 \newcommand{\rightsNotice}{%
-  \@ifundefined{\rightsStatement}{}{%
+  \ifcsdef{rightsStatement}{%
     \begin{tabular}{m{2.75cm} m{8.5cm}}
       \raisebox{-0.5\height}{%
       \href{\rightsURL{}}{%
       \XeTeXLinkBox{%
-      \includegraphics[width=2.75cm]{\rightsImage{}}
+      \includegraphics[width=2.75cm]{\cofipack/\rightsImage}
       }}}
       &
         \sf\footnotesize\setstretch{1.0}
         \rightsStatement{}
     \end{tabular}
-  }
+  }{}
 }
 
 \newcommand{\rightsBar}{%
-  \@ifundefined{\rightsImageBar}{}{%
+  \ifcsdef{rightsImageBar}{%
     \raisebox{-0.5\height}{%
       \href{\rightsURL{}}{%
         \XeTeXLinkBox{%
-          \includegraphics[height=\baselineskip]{\rightsImageBar{}}
-        }}}}
+          \includegraphics[height=\baselineskip]{\cofipack/\rightsImageBar}
+        }}}}{}
 }
 
 % Apply rights to the output document
 \iftoggle{rights}{%
   \hypersetup{
-    pdfcopyright={\@ifundefined{\rightsStatement}{}{\rightsStatement{}}},
-    pdflicenseurl={\@ifundefined{\rightsURL}{}{\rightsURL{}}}
+    pdfcopyright={\ifcsdef{rightsStatement}{\rightsStatement{}}{}},
+    pdflicenseurl={\ifcsdef{rightsURL}{\rightsURL{}}{}}
   }
   \lfoot{\rightsBar{}}%
   \fancypagestyle{fancytitle}{%

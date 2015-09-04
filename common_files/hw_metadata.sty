@@ -71,7 +71,7 @@
 }
 
 % Creative Commons Attribution Share-Alike
-\DeclareOption{rights=CC-BY-SA}{
+\DeclareOption{rights=cc-by-sa}{
   \newcommand{\rightsStatement}{%
     This work is licensed under a
     Creative Commons Attribution-ShareAlike 4.0 International License.
@@ -85,16 +85,12 @@
       Creative Commons Attribution-ShareAlike 4.0 International License
     }.
   }
-  \newcommand{\rightsImage}{%
-    \cofi{}/by-sa.png}
-  }
-  \newcommand{\rightsImageBar}{%
-    \cofi{}/by-sa-bar.png}
-  }
+  \newcommand{\rightsImage}{by-sa.png}
+  \newcommand{\rightsImageBar}{by-sa-bar.png}
 }
 
 % Creative Commons Attribution
-\DeclareOption{rights=CC-BY}{
+\DeclareOption{rights=cc-by}{
   \newcommand{\rightsStatement}{%
     This work is licensed under a
     Creative Commons Attribution 4.0 International License.
@@ -108,16 +104,12 @@
       Creative Commons Attribution 4.0 International License
     }.
   }
-  \newcommand{\rightsImage}{%
-    \cofi{}/by.png}
-  }
-  \newcommand{\rightsImageBar}{%
-    \cofi{}/by-bar.png}
-  }
+  \newcommand{\rightsImage}{by.png}
+  \newcommand{\rightsImageBar}{by-bar.png}
 }
 
 % CC0 Public Domain Dedication
-\DeclareOption{rights=CC0}{
+\DeclareOption{rights=cc0}{
   \newcommand{\rightsStatement}{%
     To the extent possible under law, the author(s) have waived
     all copyright and related or neighboring rights to this work.
@@ -131,12 +123,8 @@
     \href{\rightsURL{}}{%
       creativecommons.org/publicdomain/zero/1.0/}
   }
-  \newcommand{\rightsImage}{%
-    \cofi{}/cc-zero.png}
-  }
-  \newcommand{\rightsImageBar}{%
-    \cofi{}/cc-zero-bar.png}
-  }
+  \newcommand{\rightsImage}{cc-zero.png}
+  \newcommand{\rightsImageBar}{cc-zero-bar.png}
 }
 
 \ExecuteOptions{rights=none}
