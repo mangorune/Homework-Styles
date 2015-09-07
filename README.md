@@ -44,9 +44,9 @@ In order to compile LaTeX documents from source with this set of styles, the fol
     * TeX Gyre Pagella: http://www.gust.org.pl/projects/e-foundry/tex-gyre/pagella
       * Direct Download: http://www.gust.org.pl/projects/e-foundry/tex-gyre/pagella/qpl2.004otf.zip
     * TeX Gyre Pagella Math: http://www.gust.org.pl/projects/e-foundry/tg-math/download
-      * Direct Download: http://www.gust.org.pl/projects/e-foundry/tg-math/download/texgyreschola-math-1533.zip
+      * Direct Download: http://www.gust.org.pl/projects/e-foundry/tg-math/download/texgyrepagella-math-1632.zip
     * Inconsolata: http://www.google.com/fonts/specimen/Inconsolata
-      * Direct Download: http://www.google.com/fonts/download?kit=CNj0Ze1H6w4FVgc32wmZS4fD-WQWLbF4rYwcBGowFYY
+      * Direct Download: https://www.google.com/fonts/download?kit=CNj0Ze1H6w4FVgc32wmZS4fD-WQWLbF4rYwcBGowFYY
   * To use different fonts: change or comment-out the \set...font{<>} lines in hw_type.sty. I offer no guarantees as to typesetting quality, nor even compilation errors. Your mileage may vary.
 * Make sure your LaTeX installation is up-to-date! I use some recent features of actively-developed packages, and your LaTeX installation may have versions that are a few years old. (This is the most common problem I've encountered with my styles.)
 

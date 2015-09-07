@@ -93,8 +93,8 @@
   \DeclareMathOperator{\tr}{tr}
 
   % Real and imaginary parts of complex numbers
-  \renewcommand{\Re}{\ensuremath{\mathrm{Re}}}
-  \renewcommand{\Im}{\ensuremath{\mathrm{Im}}}
+  \renewcommand{\Re}{\mathrm{Re}}
+  \renewcommand{\Im}{\mathrm{Im}}
 
   % Per ISO 80000, true mathematical constants (e, i, π) are best typeset upright,
   % not italic, just like units (m, kg, Å) and mathematical operations (sin,
@@ -103,11 +103,11 @@
   % An upright 'e' for Euler's number
   \newcommand{\mathe}{\mathrm{e}}
   % The imaginary unit (a few options)
-  \newcommand{\mathi}{\ensuremath \mathrm{i}}
-  % \newcommand{\mathi}{\ensuremath \mathrm{j}}
-  % \newcommand{\mathi}{\ensuremath \iota}
+  \newcommand{\mathi}{\mathrm{i}}
+  % \newcommand{\mathi}{\mathrm{j}}
+  % \newcommand{\mathi}{\iota}
 
-  % 1/4πε ; a common quantity in electromagnetism
+  % 4πε ; a common quantity in electromagnetism
   \newcommand{\peo}{4 \pi \varepsilon_0}
 
   \newcommand*\incr{\mathop{}\!\mathbin\bigtriangleup}
@@ -127,9 +127,9 @@
 \DeclareOption{vectors}{
   % Preferred format for tensors
   \newcommand{\vvec}[1]{{\boldsymbol{#1}}} % Arbitrary vector (bold, arrow)
-  \newcommand{\uvec}[1]{\hat{\boldsymbol{#1}}} % Unit vector (bold, hat)
+  \newcommand{\uvec}[1]{\widehat{\boldsymbol{#1}}} % Unit vector (bold, hat)
   \newcommand{\vmat}[1]{{\boldsymbol{#1}}} % Arbitrary matrix (bold, arrow)
-  \newcommand{\umat}[1]{\hat{\boldsymbol{#1}}} % Operator (bold, hat)
+  \newcommand{\umat}[1]{\widehat{\boldsymbol{#1}}} % Operator (bold, hat)
 }
 
 \ProcessOptions\relax

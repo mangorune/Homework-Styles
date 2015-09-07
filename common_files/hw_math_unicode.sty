@@ -1,4 +1,4 @@
-\ProvidesPackage{hw_math_unicode}[2015/09/05 Homework Mathematics with Unicode]
+\ProvidesPackage{hw_math_unicode}[2015/09/07 Homework Mathematics with Unicode]
 
 % This package adds Unicode support for STEM typesetting
 % created for my homework write-ups at Harvey Mudd College.
@@ -37,21 +37,26 @@
 \else
   % I'm experimenting with using Unicode math.
   % This should come last so it can override previous settings
-  \usepackage[math-style=ISO]{unicode-math}
-  \setmathfont{texgyrepagella-math.otf}
+  \usepackage[
+  math-style=ISO,
+  bold-style=ISO,
+  sans-style=italic,
+  vargreek-shape=TeX
+  ]{unicode-math}
+  \setmathfont{TeX Gyre Pagella Math}
 
   % unicode-math changes the behavior of bold math, and therefore affects vectors.
   % Now this method works as it should, so the previous kludge is unnecessary.
   % This supercedes my old vector code.
-  \renewcommand{\vvec}[1]{{\mathbf{#1}}} % Arbitrary vector (bold)
-  \renewcommand{\uvec}[1]{\hat{\mathbf{#1}}} % Unit vector (bold, hat)
-  \renewcommand{\vmat}[1]{{\mathbf{#1}}} % Arbitrary matrix (bold)
-  \renewcommand{\umat}[1]{\hat{\mathbf{#1}}} % Operator (bold, hat)
+  \renewcommand{\vvec}[1]{{\symbf{#1}}} % Arbitrary vector (bold)
+  \renewcommand{\uvec}[1]{\widehat{\symbf{#1}}} % Unit vector (bold, hat)
+  \renewcommand{\vmat}[1]{{\symbf{#1}}} % Arbitrary matrix (bold)
+  \renewcommand{\umat}[1]{\widehat{\symbf{#1}}} % Operator (bold, hat)
 
   % The name for \umat was concieved of as an analogue of uvec
   % But it's a dumb name
   % widehat feels too wide sometimes but it's good enough for now
-  \renewcommand{\op}[1]{\widehat{\mathbf{#1}}} % Operator
+  \renewcommand{\op}[1]{\widehat{\symbf{#1}}} % Operator
   % I'd like to be able to change the state labels without necessarily changing
   % normal vector names
   % For the moment I've decided state vector labels shouldn't be bold
@@ -60,14 +65,19 @@
   % Per ISO 80000, true mathematical constants (e, i, π) are best typeset upright,
   % not italic, just like units (m, kg, Å) and mathematical operations (sin, lim)
 
+  % An upright 'e' for Euler's number
+  \renewcommand{\mathe}{\symup{e}}
+  % The imaginary unit
+  \renewcommand{\mathi}{\symup{i}}
   % An upright pi for the mathematical constant
-  \newcommand{\mathpi}{\mathrm{\pi}}
+  \newcommand{\mathpi}{\symup{\pi}}
 
   % Define '\incr' for the increment operator, commonly refered to and typeset as
   % Greek Capital Delta, but which in fact has its own Unicode code point and
   % LaTeX operator --- the ISO standard. Appearance may vary significantly or not
   % at all depending on typeface.
-  \renewcommand*\incr{\mathop{}\!\mathbin{}∆}
+  \renewcommand*\incr{\mathop{}\!\mathbin{}\increment}
+  %\renewcommand*\incr{\mathop{}\!\mathbin{}∆}
 
   % Fix extending arrows
   \setmathfont[
