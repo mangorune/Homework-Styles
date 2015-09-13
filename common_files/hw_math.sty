@@ -1,4 +1,4 @@
-\ProvidesPackage{hw_math}[2015/09/03 Homework Mathematics]
+\ProvidesPackage{hw_math}[2015/09/12 Homework Mathematics]
 
 % This package provides settings for STEM typesetting
 % created for my homework write-ups at Harvey Mudd College.
@@ -96,9 +96,9 @@
   \renewcommand{\Re}{\mathrm{Re}}
   \renewcommand{\Im}{\mathrm{Im}}
 
-  % Per ISO 80000, true mathematical constants (e, i, π) are best typeset upright,
-  % not italic, just like units (m, kg, Å) and mathematical operations (sin,
-  % lim)
+  % Per ISO 80000, true mathematical constants (e, i, π) are best typeset
+  % upright, not italic, just like units (m, kg, Å) and mathematical operations
+  % (sin, lim)
 
   % An upright 'e' for Euler's number
   \newcommand{\mathe}{\mathrm{e}}
@@ -107,8 +107,12 @@
   % \newcommand{\mathi}{\mathrm{j}}
   % \newcommand{\mathi}{\iota}
 
-  % 4πε ; a common quantity in electromagnetism
+  % 4πε
+  % common quantity in electromagnetism
   \newcommand{\peo}{4 \pi \varepsilon_0}
+  % Boltzmann constant
+  % common quantity in thermodynamics
+  \newcommand{\kb}{k_{\mathrm{B}}}
 
   \newcommand*\incr{\mathop{}\!\mathbin\bigtriangleup}
 
@@ -155,6 +159,7 @@
 
   % Auto-sized angle brackets
   \newcommand{\abr}[1]{\left\langle #1 \right\rangle}
+  \newcommand{\avg}[1]{\abr{#1}}
 %}
 
 %\DeclareOption{chemistry}{
